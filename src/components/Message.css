@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── Message row ─────────────────────────────────────── */
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 72%;
+  font-family: 'DM Sans', sans-serif;
+
+  /* Default: incoming — align left */
+  align-self: flex-start;
+}
+
+/* Outgoing — align right */
+.message.outgoing {
+  align-self: flex-end;
+}
+
+/* ── Meta row: avatar + timestamp ───────────────────── */
+.messageinfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Flip order for outgoing */
+.message.outgoing .messageinfo {
+  flex-direction: row-reverse;
+}
+
+.messageinfo img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.06);
+}
+
+.messageinfo span {
+  font-size: 0.68rem;
+  color: #4a5068;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ── Content row: text bubble + optional image ───────── */
+.massagecontact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Text bubble */
+.massagecontact p {
+  margin: 0;
+  padding: 0.6rem 0.95rem;
+  border-radius: 18px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  word-break: break-word;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: default;
+}
+
+.massagecontact p:hover {
+  transform: scale(1.012);
+}
+
+/* Incoming bubble */
+.message:not(.outgoing) .massagecontact p {
+  background: #1c1f2b;
+  color: #d4d8e8;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Outgoing bubble */
+.message.outgoing .massagecontact p {
+  background: linear-gradient(135deg, #3b4aff 0%, #5b3fff 100%);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 12px rgba(59, 74, 255, 0.35);
+}
+
+/* Shared image in bubble */
+.massagecontact img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+  border: 1.5px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.massagecontact img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Align image right for outgoing */
+.message.outgoing .massagecontact img {
+  align-self: flex-end;
+}
+
+/* ── Read receipt / status ───────────────────────────── */
+.message__status {
+  font-size: 0.65rem;
+  color: #4a5068;
+  padding: 0 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.message.outgoing .message__status {
+  justify-content: flex-end;
+}
+
+/* Double-tick icon via pseudo */
+.message__status::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  border-bottom: 1.5px solid #3b4aff;
+  border-right: 1.5px solid #3b4aff;
+  border-left: 1.5px solid #3b4aff;
+  border-radius: 0 0 2px 2px;
+  position: relative;
+  top: -2px;
+}
+
+/* ── Reaction pill ───────────────────────────────────── */
+.message__reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #1c1f2b;
+  border: 1px solid #2a2d38;
+  border-radius: 99px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  color: #8891aa;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.message.outgoing .message__reaction {
+  align-self: flex-end;
+}
+
+.message__reaction:hover {
+  background: #22263a;
+}

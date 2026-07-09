@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --surface: #12121c;
+  --border: rgba(255, 255, 255, 0.06);
+  --accent: #7c5cfc;
+  --accent-soft: rgba(124, 92, 252, 0.08);
+  --text-primary: #e8e6ff;
+  --text-muted: rgba(220, 218, 255, 0.42);
+  --online: #3ddcac;
+  --online-glow: rgba(61, 220, 172, 0.45);
+  --offline: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Chats wrapper ── */
+.chats {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* ── Single chat row ── */
+.userchat {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem; /* ✅ space reduce kiya (pehle 1rem tha) */
+  padding: 0.8rem 1.1rem;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s ease;
+}
+
+.userchat:last-child {
+  border-bottom: none;
+}
+
+.userchat:hover {
+  background: var(--accent-soft);
+}
+
+/* Purple left indicator on hover */
+.userchat::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 0 4px 4px 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.userchat:hover::before {
+  opacity: 1;
+}
+
+/* ── Avatar ── */
+.userchat img {
+  width: 42px; /* thoda chota kiya */
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid rgba(124, 92, 252, 0.55);
+  background: linear-gradient(140deg, #3b2d72 0%, #1c1836 100%);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.userchat:hover img {
+  border-color: rgba(124, 92, 252, 0.85);
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.18);
+}
+
+/* ── Text block ── */
+.userchatinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem; /* text lines ka gap bhi kam */
+  flex: 1;
+  min-width: 0;
+}
+
+.userchatinfo span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.005em;
+}
+
+.userchatinfo p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+/* ── Online status dot ── */
+.userchat .status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.userchat .status-dot.online {
+  background: var(--online);
+  box-shadow: 0 0 6px var(--online-glow);
+}
+
+.userchat .status-dot.offline {
+  background: var(--offline);
+  box-shadow: none;
+}
+
+/* ── Staggered entrance ── */
+.userchat:nth-child(1) { animation: rowIn 0.4s 0.05s cubic-bezier(0.16,1,0.3,1) both; }
+.userchat:nth-child(2) { animation: rowIn 0.4s 0.10s cubic-bezier(0.16,1,0.3,1) both; }
+.userchat:nth-child(3) { animation: rowIn 0.4s 0.15s cubic-bezier(0.16,1,0.3,1) both; }
+.userchat:nth-child(4) { animation: rowIn 0.4s 0.20s cubic-bezier(0.16,1,0.3,1) both; }
+.userchat:nth-child(5) { animation: rowIn 0.4s 0.25s cubic-bezier(0.16,1,0.3,1) both; }
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

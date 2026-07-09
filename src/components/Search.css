@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface-2: #16161f;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-focus: rgba(124, 92, 252, 0.45);
+  --accent: #7c5cfc;
+  --accent-glow: rgba(124, 92, 252, 0.25);
+  --accent-soft: rgba(124, 92, 252, 0.08);
+  --text-primary: #f0eeff;
+  --text-muted: rgba(240, 238, 255, 0.4);
+  --radius: 12px;
+}
+
+/* ── Search form ── */
+.searchform {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.searchform input {
+  width: 100%;
+  padding: 0.6rem 1rem 0.6rem 2.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.searchform input::placeholder {
+  color: var(--text-muted);
+}
+
+.searchform input:focus {
+  border-color: var(--border-focus);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.08);
+}
+
+/* Search icon via pseudo-element */
+.searchform::before {
+  content: '';
+  position: absolute;
+  left: 1.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(240,238,255,0.35)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* ── User chat row ── */
+.userchat {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1.1rem;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.userchat:hover {
+  background: rgba(124, 92, 252, 0.07);
+  border-bottom-color: rgba(124, 92, 252, 0.1);
+}
+
+.userchat::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.userchat:hover::before {
+  opacity: 1;
+}
+
+/* Avatar */
+.userchat img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(124, 92, 252, 0.3);
+  background: linear-gradient(135deg, #3a2f6e, #1e1b30);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.08);
+  flex-shrink: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.userchat:hover img {
+  border-color: rgba(124, 92, 252, 0.6);
+  box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.15);
+}
+
+/* User info */
+.userchatinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.userchatinfo span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
